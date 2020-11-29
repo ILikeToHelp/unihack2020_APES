@@ -118,7 +118,7 @@ class Devil(Monster):
     def __init__(self):
         # name, dex, stren, hp, ac, luck, element
         super().__init__('Devil', 9, 5, 17, 4, 0.3, Element.FIRE)
-        self.moves = ['Quick Attack', 'Hellflame', 'Ash Cloud']
+        self.moves = ['Attack', 'Hellflame', 'Ash Cloud']
     def hellflame(self, defender):
         print(self.name, 'used hellflame')
         baseDmg = self.strength * self.element_compare(defender) * 1.2

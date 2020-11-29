@@ -11,7 +11,7 @@ import Monsters as m
 import Player as p
 import sys
 
-SIZE = WIDTH, HEIGHT = 1920, 1080#the width and height of our screen
+SIZE = WIDTH, HEIGHT = 1280, 720#the width and height of our screen
 BACKGROUND_PICTURE = pygame.image.load('pics/bg.png') #https://www.deviantart.com/drboxhead/art/Avatar-The-Last-Airbender-Wallpaper-750669085
 BACKGROUND_PICTURE = pygame.transform.scale(BACKGROUND_PICTURE, SIZE)
 
@@ -199,7 +199,8 @@ def main(player1, player2):
 
     # light shade of the button
     color_light = (170,170,170)
-
+    # gold
+    color_gold = (255, 215, 0, 255)
     # dark shade of the button
     color_dark = (100,100,100)
 
@@ -227,10 +228,10 @@ def main(player1, player2):
 
     while True:
         mouse = pygame.mouse.get_pos()
-        button_1_loc = [WIDTH/7,4*HEIGHT/5,WIDTH/4,HEIGHT/18]
-        button_2_loc = [WIDTH/7,7*HEIGHT/8,WIDTH/4,HEIGHT/18]
-        button_3_loc = [WIDTH/7 + 3*WIDTH/7,4*HEIGHT/5,WIDTH/4,HEIGHT/18]
-        button_4_loc = [WIDTH/7 + 3*WIDTH/7,7*HEIGHT/8,WIDTH/4,HEIGHT/18]
+        button_1_loc = [WIDTH/7, 4*HEIGHT/5, WIDTH/4, HEIGHT/18]
+        button_2_loc = [WIDTH/7, 7*HEIGHT/8, WIDTH/4, HEIGHT/18]
+        button_3_loc = [WIDTH/7 + 3*WIDTH/7, 4*HEIGHT/5, WIDTH/4, HEIGHT/18]
+        button_4_loc = [WIDTH/7 + 3*WIDTH/7, 7*HEIGHT/8, WIDTH/4, HEIGHT/18]
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -329,7 +330,12 @@ def main(player1, player2):
         line_loc = [0,3*HEIGHT/4,160,70]
 
         #surface, color, start_pos, end_pos, width
-        pygame.draw.line(screen, color_dark,[0,3*HEIGHT/4], [WIDTH,3*HEIGHT/4], 8)
+        if(PlayerOneTurn):
+            pygame.draw.line(screen, color_gold,[WIDTH/8,7*HEIGHT/10], [3*WIDTH/8,7*HEIGHT/10], HEIGHT//100)
+        else:
+            pygame.draw.line(screen, color_gold,[11*WIDTH/16,7*HEIGHT/10], [15*WIDTH/16,7*HEIGHT/10], HEIGHT//100)
+
+        pygame.draw.line(screen, color_dark,[0,3*HEIGHT/4], [WIDTH,3*HEIGHT/4], HEIGHT//150)
         pygame.draw.rect(screen,color_dark,button_1_loc)
         pygame.draw.rect(screen,color_dark,button_2_loc)
         pygame.draw.rect(screen,color_dark,button_3_loc)
@@ -369,8 +375,8 @@ my_naga = m.Naga()
 
 
 
-p1 = p.Player(1, my_eagle, "Patryk")
-p2 = p.Player(2, my_treebeard, "Sotiris")
+p1 = p.Player(1, my_devil, "Patryk")
+p2 = p.Player(2, my_naga, "Sotiris")
 
 
 main(p1,p2)
