@@ -184,6 +184,9 @@ resize_monsters()
 
 
 def main(player1, player2):
+
+    PlayerOneTurn = True
+
     pygame.init()
     screen = pygame.display.set_mode(SIZE)
 
@@ -216,19 +219,56 @@ def main(player1, player2):
     clock = pygame.time.Clock()
 
     while True:
+        mouse = pygame.mouse.get_pos()
+        button_1_loc = [WIDTH/7,4*HEIGHT/5,WIDTH/4,HEIGHT/18]
+        button_2_loc = [WIDTH/7,7*HEIGHT/8,WIDTH/4,HEIGHT/18]
+        button_3_loc = [WIDTH/7 + 3*WIDTH/7,4*HEIGHT/5,WIDTH/4,HEIGHT/18]
+        button_4_loc = [WIDTH/7 + 3*WIDTH/7,7*HEIGHT/8,WIDTH/4,HEIGHT/18]
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
 
+            #checks if a mouse is clicked
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                # if the first button is clicked, perform quick attack
+                if button_1_loc[0] <= mouse[0] <= button_1_loc[0]+ button_1_loc[2] and button_1_loc[1] <= mouse[1] <= button_1_loc[1]+button_1_loc[3]:
+                    if(PlayerOneTurn):
+                        # if it's players one turn, print the values
+                        print("Monsters " + player2.monster.name + " old hp was: " + str(player2.monster.hp))
+                        # and call the corresponding functions
+                        player1.monster.quick_attack(player2.monster)
+                        print("Monsters " + player2.monster.name + " new hp is: " + str(player2.monster.hp))
+                        PlayerOneTurn = False
+                    else:
+                        #reverse is true
+                        print("Monsters " + player1.monster.name + " old hp was: " + str(player1.monster.hp))
+                        player2.monster.quick_attack(player1.monster)
+                        print("Monsters " + player1.monster.name + " new hp is: " + str(player1.monster.hp))
+                        PlayerOneTurn = True
+
+                # if button_2_loc[0] <= mouse[0] <= button_2_loc[0]+ button_2_loc[2] and button_2_loc[1] <= mouse[1] <= button_2_loc[1]+button_2_loc[3]:
+                #     print(monster2.hp)
+                #     monster1.dive_attack(monster2)
+                #     print(monster2.hp)
+                #     Ent_turn = True
+                #     Eagle_turn =False
+                #
+                #
+                #
+                # if button_3_loc[0] <= mouse[0] <= button_3_loc[0]+ button_3_loc[2] and button_3_loc[1] <= mouse[1] <= button_3_loc[1]+button_3_loc[3]:
+                #     print(monster2.hp)
+                #     monster1.wing_slash(monster2)
+                #     print(monster2.hp)
+                #     Ent_turn = True
+                #     Eagle_turn =False
+
         my_group.update()
 
         screen.blit(BACKGROUND_PICTURE, [0,0])
 
-        button_1_loc = [WIDTH/7,4*HEIGHT/5,WIDTH/4,HEIGHT/18]
-        button_2_loc = [WIDTH/7,7*HEIGHT/8,WIDTH/4,HEIGHT/18]
-        button_3_loc = [WIDTH/7 + 3*WIDTH/7,4*HEIGHT/5,WIDTH/4,HEIGHT/18]
-        button_4_loc = [WIDTH/7 + 3*WIDTH/7,7*HEIGHT/8,WIDTH/4,HEIGHT/18]
+
         line_loc = [0,3*HEIGHT/4,160,70]
 
         #surface, color, start_pos, end_pos, width
@@ -267,55 +307,18 @@ my_devil = m.Devil()
 
 my_naga = m.Naga()
 
-
-
 p1 = p.Player(1, my_naga, "Patryk")
 p2 = p.Player(2, my_devil, "Sotiris")
 
 
 main(p1,p2)
 
-
+#
 # #def monster_turn(monster):
-#
-# Eagle_turn =True
-# Ent_turn = False
-#
 # while True:
 #   if Eagle_turn ==True:
 #     for ev in py.event.get():
 #
-#         if ev.type == py.QUIT:
-#             py.quit()
-#
-#         #checks if a mouse is clicked
-#         if ev.type == py.MOUSEBUTTONDOWN:
-#
-#             #if the mouse is clicked on the
-#             # button the game is terminated
-#             if button_1_loc[0] <= mouse[0] <= button_1_loc[0]+ button_1_loc[2] and button_1_loc[1] <= mouse[1] <= button_1_loc[1]+button_1_loc[3]:
-#                 monster1.quick_attack(monster2)
-#                 print(monster2.hp)
-#                 Ent_turn = True
-#                 Eagle_turn =False
-#
-#
-#
-#             if button_2_loc[0] <= mouse[0] <= button_2_loc[0]+ button_2_loc[2] and button_2_loc[1] <= mouse[1] <= button_2_loc[1]+button_2_loc[3]:
-#                 print(monster2.hp)
-#                 monster1.dive_attack(monster2)
-#                 print(monster2.hp)
-#                 Ent_turn = True
-#                 Eagle_turn =False
-#
-#
-#
-#             if button_3_loc[0] <= mouse[0] <= button_3_loc[0]+ button_3_loc[2] and button_3_loc[1] <= mouse[1] <= button_3_loc[1]+button_3_loc[3]:
-#                 print(monster2.hp)
-#                 monster1.wing_slash(monster2)
-#                 print(monster2.hp)
-#                 Ent_turn = True
-#                 Eagle_turn =False
 #
 #
 #     # fills the screen with a color
