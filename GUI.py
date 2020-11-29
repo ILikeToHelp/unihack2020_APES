@@ -9,46 +9,13 @@ import pygame
 from PIL import Image
 import Monsters as m
 import Player as p
+import sys
 
-SIZE = WIDTH, HEIGHT = 1350, 900#the width and height of our screen
+SIZE = WIDTH, HEIGHT = 1280, 720#the width and height of our screen
 BACKGROUND_PICTURE = pygame.image.load('pics/bg.png') #https://www.deviantart.com/drboxhead/art/Avatar-The-Last-Airbender-Wallpaper-750669085
 BACKGROUND_PICTURE = pygame.transform.scale(BACKGROUND_PICTURE, SIZE)
 
 FPS = 6  #Frames per second
-
-# ImageR1 = 'pics/resizedEagleR1.png'
-# ImageR2 = 'pics/resizedEagleR2.png'
-# ImageR3 = 'pics/resizedEagleR3.png'
-
-# Define for now (httpswww.kindpng.comimgvhmmwJxR_eagle-sprite-sheet-png-transparent-png)
-
-
-
-
-# Define for now (https://broseoseike.wordpress.com/tag/sprite-sheet/#jp-carousel-(406)
-
-
-# TODO FIX THOSE SPRITES -> VERY BAD
-
-# ImageR1 = 'pics/resizedEntR1.png'
-# ImageR2 = 'pics/resizedEntR2.png'
-# ImageR3 = 'pics/resizedEntR3.png'
-
-
-
-# Define for now (https://www.coroflot.com/geekbrush/Wicked-Little-Devil)
-
-
-# ImageR1 = 'pics/resizedDevilR1.png'
-# ImageR2 = 'pics/resizedDevilR2.png'
-# ImageR3 = 'pics/resizedDevilR3.png'
-
-
-#Define for now (https://broseoseike.files.wordpress.com/2009/04/naga.png)
-
-# ImageR1 = 'pics/resizedNagaR1.png'
-# ImageR2 = 'pics/resizedNagaR2.png'
-# ImageR3 = 'pics/resizedNagaR3.png'
 
 
 class MySprite(pygame.sprite.Sprite):
@@ -181,9 +148,9 @@ positionR = pygame.Rect(WIDTH-2*WIDTH/7, HEIGHT/3, 150, 198)
 resize_monsters()
 
 
-<<<<<<< HEAD
 def player1Lost():
     print("PLAYER ONE LOST")
+    sys.exit()
 
 def player2Lost():
     print("PLAYER TWO LOST")
@@ -191,10 +158,12 @@ def player2Lost():
 
 def playerOneFlees():
     print("PLAYER ONE HAS FLED")
+    sys.exit()
 
 def playerTwoFlees():
     print("PLAYER TWO HAS FLED")
     sys.exit()
+
 
 def main(player1, player2):
 
@@ -202,11 +171,6 @@ def main(player1, player2):
 
     PlayerOneTurn = True
 
-=======
-
-
-def main(player1, player2):
->>>>>>> 8fcc523534f23b6ff2412dbb2099348aa6c73a08
     pygame.init()
     screen = pygame.display.set_mode(SIZE)
 
@@ -219,6 +183,10 @@ def main(player1, player2):
     # white color
     color = (255,255,255)
 
+    color_pink = (255, 62, 150, 255)
+    color_dark_red = (139, 0, 0, 255)
+
+    color_gold = (255, 215, 0, 255)
     smallfont = pygame.font.SysFont('Corbel',35)
 
     button_fonts_m1 = []
@@ -239,12 +207,17 @@ def main(player1, player2):
     clock = pygame.time.Clock()
 
     while True:
+        mouse = pygame.mouse.get_pos()
+        button_1_loc = [WIDTH/7, 4*HEIGHT/5, WIDTH/4, HEIGHT/18]
+        button_2_loc = [WIDTH/7, 7*HEIGHT/8, WIDTH/4, HEIGHT/18]
+        button_3_loc = [WIDTH/7 + 3*WIDTH/7, 4*HEIGHT/5, WIDTH/4, HEIGHT/18]
+        button_4_loc = [WIDTH/7 + 3*WIDTH/7, 7*HEIGHT/8, WIDTH/4, HEIGHT/18]
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
 
-<<<<<<< HEAD
             #checks if a mouse is clicked
             if event.type == pygame.MOUSEBUTTONDOWN:
                 # if the first button is clicked, perform quick attack
@@ -342,27 +315,18 @@ def main(player1, player2):
                         playerTwoFlees()
 
             pygame.display.update()
-=======
->>>>>>> 8fcc523534f23b6ff2412dbb2099348aa6c73a08
+
         my_group.update()
 
         screen.blit(BACKGROUND_PICTURE, [0,0])
 
-        button_1_loc = [WIDTH/7,4*HEIGHT/5,WIDTH/4,HEIGHT/18]
-        button_2_loc = [WIDTH/7,7*HEIGHT/8,WIDTH/4,HEIGHT/18]
-        button_3_loc = [WIDTH/7 + 3*WIDTH/7,4*HEIGHT/5,WIDTH/4,HEIGHT/18]
-        button_4_loc = [WIDTH/7 + 3*WIDTH/7,7*HEIGHT/8,WIDTH/4,HEIGHT/18]
         line_loc = [0,3*HEIGHT/4,160,70]
 
         #surface, color, start_pos, end_pos, width
-<<<<<<< HEAD
         if(PlayerOneTurn):
             pygame.draw.line(screen, color_gold,[WIDTH/8,7*HEIGHT/10], [3*WIDTH/8,7*HEIGHT/10], HEIGHT//100)
         else:
             pygame.draw.line(screen, color_gold,[11*WIDTH/16,7*HEIGHT/10], [15*WIDTH/16,7*HEIGHT/10], HEIGHT//100)
-
-        color_pink = (255, 62, 150, 255)
-        color_dark_red = (139, 0, 0, 255)
 
 
 
@@ -373,9 +337,7 @@ def main(player1, player2):
 
         # MENU
         pygame.draw.line(screen, color_dark,[0,3*HEIGHT/4], [WIDTH,3*HEIGHT/4], HEIGHT//150)
-=======
         pygame.draw.line(screen, color_dark,[0,3*HEIGHT/4], [WIDTH,3*HEIGHT/4], 8)
->>>>>>> 8fcc523534f23b6ff2412dbb2099348aa6c73a08
         pygame.draw.rect(screen,color_dark,button_1_loc)
         pygame.draw.rect(screen,color_dark,button_2_loc)
         pygame.draw.rect(screen,color_dark,button_3_loc)
@@ -389,176 +351,13 @@ def main(player1, player2):
 
 
         # if players 1 turn
-
-        for i in range(len(button_fonts_m1)):
-            screen.blit(button_fonts_m1[i], text_locations[i])
+        if(PlayerOneTurn):
+            for i in range(len(button_fonts_m1)):
+                screen.blit(button_fonts_m1[i], text_locations[i])
+        else:
+            for i in range(len(button_fonts_m2)):
+                screen.blit(button_fonts_m2[i], text_locations[i])
 
         my_group.draw(screen)
         pygame.display.update()
         clock.tick(FPS)
-
-
-
-
-
-
-my_eagle = m.Eagle()
-
-my_treebeard = m.Treebeard()
-
-my_devil = m.Devil()
-
-my_naga = m.Naga()
-
-
-
-p1 = p.Player(1, my_devil, "Patryk")
-p2 = p.Player(2, my_naga, "Sotiris")
-
-
-main(p1,p2)
-
-
-# #def monster_turn(monster):
-#
-# Eagle_turn =True
-# Ent_turn = False
-#
-# while True:
-#   if Eagle_turn ==True:
-#     for ev in py.event.get():
-#
-#         if ev.type == py.QUIT:
-#             py.quit()
-#
-#         #checks if a mouse is clicked
-#         if ev.type == py.MOUSEBUTTONDOWN:
-#
-#             #if the mouse is clicked on the
-#             # button the game is terminated
-#             if button_1_loc[0] <= mouse[0] <= button_1_loc[0]+ button_1_loc[2] and button_1_loc[1] <= mouse[1] <= button_1_loc[1]+button_1_loc[3]:
-#                 monster1.quick_attack(monster2)
-#                 print(monster2.hp)
-#                 Ent_turn = True
-#                 Eagle_turn =False
-#
-#
-#
-#             if button_2_loc[0] <= mouse[0] <= button_2_loc[0]+ button_2_loc[2] and button_2_loc[1] <= mouse[1] <= button_2_loc[1]+button_2_loc[3]:
-#                 print(monster2.hp)
-#                 monster1.dive_attack(monster2)
-#                 print(monster2.hp)
-#                 Ent_turn = True
-#                 Eagle_turn =False
-#
-#
-#
-#             if button_3_loc[0] <= mouse[0] <= button_3_loc[0]+ button_3_loc[2] and button_3_loc[1] <= mouse[1] <= button_3_loc[1]+button_3_loc[3]:
-#                 print(monster2.hp)
-#                 monster1.wing_slash(monster2)
-#                 print(monster2.hp)
-#                 Ent_turn = True
-#                 Eagle_turn =False
-#
-#
-#     # fills the screen with a color
-#     screen.fill((60,25,60))
-#
-#     # stores the (x,y) coordinates into
-#     # the variable as a tuple
-#     mouse = py.mouse.get_pos()
-#
-#
-#     # if mouse is hovered on a button it
-#     # changes to lighter shade
-#     if button_1_loc[0] <= mouse[0] <= button_1_loc[0]+ button_1_loc[2] and button_1_loc[1] <= mouse[1] <= button_1_loc[1]+button_1_loc[3]:
-#         py.draw.rect(screen,color_light,button_1_loc)
-#
-#     elif button_2_loc[0] <= mouse[0] <= button_2_loc[0]+ button_2_loc[2] and button_2_loc[1] <= mouse[1] <= button_2_loc[1]+button_2_loc[3]:
-#         py.draw.rect(screen,color_light,button_2_loc)
-#
-#     elif button_3_loc[0] <= mouse[0] <= button_3_loc[0]+ button_3_loc[2] and button_3_loc[1] <= mouse[1] <= button_3_loc[1]+button_3_loc[3]:
-#         py.draw.rect(screen,color_light,button_3_loc)
-#
-#     else:
-#         py.draw.rect(screen,color_dark,button_1_loc )
-#         py.draw.rect(screen,color_dark,button_2_loc )
-#         py.draw.rect(screen,color_dark,button_3_loc )
-#
-#
-#     # superimposing the text onto our button
-#     screen.blit(attack_1_mon_1 ,(button_1_loc[0],button_1_loc[1]))
-#     screen.blit(attack_2_mon_1 ,(button_2_loc[0],button_2_loc[1]))
-#     screen.blit(attack_3_mon_1 ,(button_3_loc[0],button_3_loc[1]))
-#
-#
-#     # updates the frames of the game
-#     py.display.update()
-#
-#   elif Ent_turn  ==True:
-#     for ev in py.event.get():
-#
-#         if ev.type == py.QUIT:
-#             py.quit()
-#
-#         #checks if a mouse is clicked
-#         if ev.type == py.MOUSEBUTTONDOWN:
-#
-#             #if the mouse is clicked on the
-#             # button the game is terminated
-#             if button_1_loc[0] <= mouse[0] <= button_1_loc[0]+ button_1_loc[2] and button_1_loc[1] <= mouse[1] <= button_1_loc[1]+button_1_loc[3]:
-#                 monster2.stomp(monster1)
-#                 print(monster1.hp)
-#                 Ent_turn = False
-#                 Eagle_turn =True
-#
-#
-#
-#             if button_2_loc[0] <= mouse[0] <= button_2_loc[0]+ button_2_loc[2] and button_2_loc[1] <= mouse[1] <= button_2_loc[1]+button_2_loc[3]:
-#                 monster2.stomp(monster1)
-#                 print(monster1.hp)
-#                 Ent_turn = False
-#                 Eagle_turn =True
-#
-#
-#
-#             if button_3_loc[0] <= mouse[0] <= button_3_loc[0]+ button_3_loc[2] and button_3_loc[1] <= mouse[1] <= button_3_loc[1]+button_3_loc[3]:
-#                 monster2.vine_whip(monster1)
-#                 print(monster1.hp)
-#                 Ent_turn = False
-#                 Eagle_turn = True
-#
-#
-#     # fills the screen with a color
-#     screen.fill((60,25,60))
-#
-#     # stores the (x,y) coordinates into
-#     # the variable as a tuple
-#     mouse = py.mouse.get_pos()
-#
-#
-#     # if mouse is hovered on a button it
-#     # changes to lighter shade
-#     if button_1_loc[0] <= mouse[0] <= button_1_loc[0]+ button_1_loc[2] and button_1_loc[1] <= mouse[1] <= button_1_loc[1]+button_1_loc[3]:
-#         py.draw.rect(screen,color_light,button_1_loc)
-#
-#     elif button_2_loc[0] <= mouse[0] <= button_2_loc[0]+ button_2_loc[2] and button_2_loc[1] <= mouse[1] <= button_2_loc[1]+button_2_loc[3]:
-#         py.draw.rect(screen,color_light,button_2_loc)
-#
-#     elif button_3_loc[0] <= mouse[0] <= button_3_loc[0]+ button_3_loc[2] and button_3_loc[1] <= mouse[1] <= button_3_loc[1]+button_3_loc[3]:
-#         py.draw.rect(screen,color_light,button_3_loc)
-#
-#     else:
-#         py.draw.rect(screen,color_dark,button_1_loc )
-#         py.draw.rect(screen,color_dark,button_2_loc )
-#         py.draw.rect(screen,color_dark,button_3_loc )
-#
-#
-#     # superimposing the text onto our button
-#     screen.blit(attack_1_mon_2 ,(button_1_loc[0],button_1_loc[1]))
-#     screen.blit(attack_2_mon_2 ,(button_2_loc[0],button_2_loc[1]))
-#     screen.blit(attack_3_mon_2 ,(button_3_loc[0],button_3_loc[1]))
-#
-#
-#     # updates the frames of the game
-#     py.display.update()

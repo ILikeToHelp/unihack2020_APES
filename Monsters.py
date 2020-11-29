@@ -24,6 +24,12 @@ class Monster():
         self.luck = luck
         self.element = element
 
+
+
+    def hp_procentage(self):
+        return self.hp / self.max_hp
+
+
     # Uses the luck to see if the hit is critical
     def crit_multiplier(self):
         critChance = np.random.rand()
@@ -32,10 +38,6 @@ class Monster():
             return 2
         else:
             return 1
-
-    def hp_procentage(self):
-        return self.hp / self.max_hp
-        
     def dodge(defender):
         dodgeChance = np.random.rand()
         if dodgeChance < (defender.dexterity) * 0.05:
@@ -168,16 +170,3 @@ class Naga(Monster):
         defender.hp -= damage
         if defender.hp <= 0:
             return True
-
-
-
-monster1 = Eagle()
-monster2 = Treebeard()
-monster3 = Devil()
-monster4 = Naga()
-
-move_list_eagle = ['Quick Attack', 'Dive Attack', 'Wing Slash']
-move_list_treebeard = ['Attack', 'Stomp', 'Vine Whip']
-move_list_eagle = ['Quick Attack', 'Dive Attack', 'Wing Slash']
-move_list_treebeard = ['Quick Attack', 'Stomp', 'Vine Whip']
-move_list_devil = ['Quick Attack', 'Hellflame', 'Ash Cloud']
