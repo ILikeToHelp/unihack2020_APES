@@ -84,6 +84,8 @@ class Monster():
         baseDmg = self.strength * self.element_compare(defender)
         damage = baseDmg * self.crit_multiplier() * defender.armour_multiplier()
         defender.hp -= damage
+        if defender.hp <= 0:
+            return True
 
 class Eagle(Monster):
 
@@ -100,6 +102,8 @@ class Eagle(Monster):
         baseDmg = self.strength * self.element_compare(defender) * 1.2
         damage = baseDmg * self.crit_multiplier() * defender.armour_multiplier()
         defender.hp -= damage
+        if defender.hp <= 0:
+            return True
 
 class Treebeard(Monster):
 
@@ -112,29 +116,37 @@ class Treebeard(Monster):
         baseDmg = self.strength * self.element_compare(defender) * 1.2
         damage = baseDmg * self.crit_multiplier() * defender.armour_multiplier()
         defender.hp -= damage
+        if defender.hp <= 0:
+            return True
 
     def vine_whip(self, defender):
         print(self.name, 'used vine whip')
         baseDmg = self.strength * self.element_compare(defender) * 1.2
         damage = baseDmg * self.crit_multiplier() * defender.armour_multiplier()
         defender.hp -= damage
+        if defender.hp <= 0:
+            return True
 
 class Devil(Monster):
     def __init__(self):
         # name, dex, stren, hp, ac, luck, element
         super().__init__('Devil', 9, 5, 17, 4, 0.3, Element.FIRE)
-        self.moves = ['Attack', 'Hellflame', 'Ash Cloud']
+        self.moves = ['Quick Attack', 'Hellflame', 'Ash Cloud']
     def hellflame(self, defender):
         print(self.name, 'used hellflame')
         baseDmg = self.strength * self.element_compare(defender) * 1.2
         damage = baseDmg * self.crit_multiplier() * defender.armour_multiplier()
         defender.hp -= damage
+        if defender.hp <= 0:
+            return True
 
     def ash_cloud (self, defender):
         print(self.name, 'used ash cloud')
         baseDmg = self.strength * self.element_compare(defender) * 1.2
         damage = baseDmg * self.crit_multiplier() * defender.armour_multiplier()
         defender.hp -= damage
+        if defender.hp <= 0:
+            return True
 
 class Naga(Monster):
     def __init__(self):
@@ -146,9 +158,26 @@ class Naga(Monster):
         baseDmg = self.strength * self.element_compare(defender) * 1.2
         damage = baseDmg * self.crit_multiplier() * defender.armour_multiplier()
         defender.hp -= damage
+        if defender.hp <= 0:
+            return True
 
     def rainstorm (self, defender):
         print(self.name, 'used rainstorm')
         baseDmg = self.strength * self.element_compare(defender) * 1.2
         damage = baseDmg * self.crit_multiplier() * defender.armour_multiplier()
         defender.hp -= damage
+        if defender.hp <= 0:
+            return True
+
+
+
+monster1 = Eagle()
+monster2 = Treebeard()
+monster3 = Devil()
+monster4 = Naga()
+
+move_list_eagle = ['Quick Attack', 'Dive Attack', 'Wing Slash']
+move_list_treebeard = ['Attack', 'Stomp', 'Vine Whip']
+move_list_eagle = ['Quick Attack', 'Dive Attack', 'Wing Slash']
+move_list_treebeard = ['Quick Attack', 'Stomp', 'Vine Whip']
+move_list_devil = ['Quick Attack', 'Hellflame', 'Ash Cloud']
