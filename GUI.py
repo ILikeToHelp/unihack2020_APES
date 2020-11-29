@@ -9,9 +9,8 @@ import pygame
 from PIL import Image
 import Monsters as m
 import Player as p
-import sys
 
-SIZE = WIDTH, HEIGHT = 1280, 720#the width and height of our screen
+SIZE = WIDTH, HEIGHT = 1350, 900#the width and height of our screen
 BACKGROUND_PICTURE = pygame.image.load('pics/bg.png') #https://www.deviantart.com/drboxhead/art/Avatar-The-Last-Airbender-Wallpaper-750669085
 BACKGROUND_PICTURE = pygame.transform.scale(BACKGROUND_PICTURE, SIZE)
 
@@ -122,7 +121,7 @@ class MySprite(pygame.sprite.Sprite):
 
 
 def resize_monsters():
-    # NAGA
+    # NAGA https://www.pinterest.com.au/pin/782922716459124912/
     resize_image("NagaL1.png", int(WIDTH/6), int(HEIGHT/3))
     resize_image("NagaL2.png", int(WIDTH/6), int(HEIGHT/3))
     resize_image("NagaL3.png", int(WIDTH/6), int(HEIGHT/3))
@@ -131,7 +130,7 @@ def resize_monsters():
     resize_image("NagaR2.png", int(WIDTH/6), int(HEIGHT/3))
     resize_image("NagaR3.png", int(WIDTH/6), int(HEIGHT/3))
 
-    # DEVIL# #
+    # DEVIL https://sventhole.itch.io/imp/devlog/35421/released-new-character-imp
 # ImageR1 = 'pics/resizedNagaR1.png'
 # ImageR2 = 'pics/resizedNagaR2.png'
 # ImageR3 = 'pics/resizedNagaR3.png'
@@ -144,7 +143,7 @@ def resize_monsters():
     resize_image("DevilR3.png", int(WIDTH/6), int(HEIGHT/3))
 
 
-    #EAGLE
+    #EAGLE https://blog.valkrysa.com/2017/11/19/intro-to-pixel-art-gamedev-weekly/
     resize_image("EagleL1.png", int(WIDTH/6), int(HEIGHT/3))
     resize_image("EagleL2.png", int(WIDTH/6), int(HEIGHT/3))
     resize_image("EagleL3.png", int(WIDTH/6), int(HEIGHT/3))
@@ -154,7 +153,7 @@ def resize_monsters():
     resize_image("EagleR3.png", int(WIDTH/6), int(HEIGHT/3))
 
 
-    #TREEBEARD
+    #TREEBEARD https://imgur.com/t/pixel_art/QDJLe
     resize_image("TreebeardL1.png", int(WIDTH/6), int(HEIGHT/3))
     resize_image("TreebeardL2.png", int(WIDTH/6), int(HEIGHT/3))
     resize_image("TreebeardL3.png", int(WIDTH/6), int(HEIGHT/3))
@@ -182,25 +181,15 @@ positionR = pygame.Rect(WIDTH-2*WIDTH/7, HEIGHT/3, 150, 198)
 resize_monsters()
 
 
-def playerOneFlees():
-    print("PLAYER ONE IS A PUSSSY-A CAT I MEAN> SMALL CAT")
-    sys.exit()
 
-def playerTwoFlees():
-    print("PLAYER TWO IS A PUSSSY-A CAT I MEAN> SMALL CAT")
-    sys.exit()
 
 def main(player1, player2):
-
-    PlayerOneTurn = True
-
     pygame.init()
     screen = pygame.display.set_mode(SIZE)
 
     # light shade of the button
     color_light = (170,170,170)
-    # gold
-    color_gold = (255, 215, 0, 255)
+
     # dark shade of the button
     color_dark = (100,100,100)
 
@@ -227,115 +216,23 @@ def main(player1, player2):
     clock = pygame.time.Clock()
 
     while True:
-        mouse = pygame.mouse.get_pos()
-        button_1_loc = [WIDTH/7, 4*HEIGHT/5, WIDTH/4, HEIGHT/18]
-        button_2_loc = [WIDTH/7, 7*HEIGHT/8, WIDTH/4, HEIGHT/18]
-        button_3_loc = [WIDTH/7 + 3*WIDTH/7, 4*HEIGHT/5, WIDTH/4, HEIGHT/18]
-        button_4_loc = [WIDTH/7 + 3*WIDTH/7, 7*HEIGHT/8, WIDTH/4, HEIGHT/18]
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
 
-            #checks if a mouse is clicked
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                # if the first button is clicked, perform quick attack
-                if button_1_loc[0] <= mouse[0] <= button_1_loc[0]+ button_1_loc[2] and button_1_loc[1] <= mouse[1] <= button_1_loc[1]+button_1_loc[3]:
-                    pygame.draw.rect(screen,color_light,button_1_loc)
-
-                    if(PlayerOneTurn):
-                        # if it's players one turn, print the values
-                        print("Monsters " + player2.monster.name + " old hp was: " + str(player2.monster.hp))
-                        # and call the corresponding functions
-                        player1.monster.quick_attack(player2.monster)
-                        print("Monsters " + player2.monster.name + " new hp is: " + str(player2.monster.hp))
-                        PlayerOneTurn = False
-                    else:
-                        #reverse is true
-                        print("Monsters " + player1.monster.name + " old hp was: " + str(player1.monster.hp))
-                        player2.monster.quick_attack(player1.monster)
-                        print("Monsters " + player1.monster.name + " new hp is: " + str(player1.monster.hp))
-                        PlayerOneTurn = True
-                if button_2_loc[0] <= mouse[0] <= button_2_loc[0]+ button_2_loc[2] and button_2_loc[1] <= mouse[1] <= button_2_loc[1]+button_2_loc[3]:
-                    pygame.draw.rect(screen,color_light,button_2_loc)
-                    if(PlayerOneTurn):
-                        # if it's players one turn, print the values
-                        print("Monsters " + player2.monster.name + " old hp was: " + str(player2.monster.hp))
-                        if(player1.monster.name == "Naga"):
-                            player1.monster.aqua_pulse(player2.monster)
-                        elif(player1.monster.name == "Treebeard"):
-                            player1.monster.stomp(player2.monster)
-                        elif(player1.monster.name == "Eagle"):
-                            player1.monster.dive_attack(player2.monster)
-                        elif(player1.monster.name == "Devil"):
-                            player1.monster.hellflame(player2.monster)
-                        print("Monsters " + player2.monster.name + " new hp is: " + str(player2.monster.hp))
-                        PlayerOneTurn = False
-                    else:
-                        # if it's players one turn, print the values
-                        print("Monsters " + player1.monster.name + " old hp was: " + str(player1.monster.hp))
-                        if(player2.monster.name == "Naga"):
-                            player2.monster.aqua_pulse(player1.monster)
-                        elif(player2.monster.name == "Treebeard"):
-                            player2.monster.stomp(player1.monster)
-                        elif(player2.monster.name == "Eagle"):
-                            player2.monster.dive_attack(player1.monster)
-                        elif(player2.monster.name == "Devil"):
-                            player2.monster.hellflame(player1.monster)
-                        print("Monsters " + player1.monster.name + " new hp is: " + str(player1.monster.hp))
-                        PlayerOneTurn = True
-                if button_3_loc[0] <= mouse[0] <= button_3_loc[0]+ button_3_loc[2] and button_3_loc[1] <= mouse[1] <= button_3_loc[1]+button_3_loc[3]:
-                    pygame.draw.rect(screen,color_light,button_3_loc)
-                    if(PlayerOneTurn):
-                        # if it's players one turn, print the values
-                        print("Monsters " + player2.monster.name + " old hp was: " + str(player2.monster.hp))
-                        if(player1.monster.name == "Naga"):
-                            player1.monster.rainstorm(player2.monster)
-                        elif(player1.monster.name == "Treebeard"):
-                            player1.monster.vine_whip(player2.monster)
-                        elif(player1.monster.name == "Eagle"):
-                            player1.monster.wing_slash(player2.monster)
-                        elif(player1.monster.name == "Devil"):
-                            player1.monster.ash_cloud(player2.monster)
-                        print("Monsters " + player2.monster.name + " new hp is: " + str(player2.monster.hp))
-                        PlayerOneTurn = False
-                    else:
-                        # if it's players one turn, print the values
-                        print("Monsters " + player1.monster.name + " old hp was: " + str(player1.monster.hp))
-                        if(player2.monster.name == "Naga"):
-                            player2.monster.rainstorm(player1.monster)
-                        elif(player2.monster.name == "Treebeard"):
-                            player2.monster.vine_whip(player1.monster)
-                        elif(player2.monster.name == "Eagle"):
-                            player2.monster.wing_slash(player1.monster)
-                        elif(player2.monster.name == "Devil"):
-                            player2.monster.ash_cloud(player1.monster)
-                        print("Monsters " + player1.monster.name + " new hp is: " + str(player1.monster.hp))
-                        PlayerOneTurn = True
-                if button_4_loc[0] <= mouse[0] <= button_4_loc[0]+ button_4_loc[2] and button_4_loc[1] <= mouse[1] <= button_4_loc[1]+button_4_loc[3]:
-                    pygame.draw.rect(screen,color_light,button_1_loc)
-
-                    if(PlayerOneTurn):
-                        playerOneFlees()
-                    else:
-                        playerTwoFlees()
-
-            pygame.display.update()
         my_group.update()
 
         screen.blit(BACKGROUND_PICTURE, [0,0])
 
-
+        button_1_loc = [WIDTH/7,4*HEIGHT/5,WIDTH/4,HEIGHT/18]
+        button_2_loc = [WIDTH/7,7*HEIGHT/8,WIDTH/4,HEIGHT/18]
+        button_3_loc = [WIDTH/7 + 3*WIDTH/7,4*HEIGHT/5,WIDTH/4,HEIGHT/18]
+        button_4_loc = [WIDTH/7 + 3*WIDTH/7,7*HEIGHT/8,WIDTH/4,HEIGHT/18]
         line_loc = [0,3*HEIGHT/4,160,70]
 
         #surface, color, start_pos, end_pos, width
-        if(PlayerOneTurn):
-            pygame.draw.line(screen, color_gold,[WIDTH/8,7*HEIGHT/10], [3*WIDTH/8,7*HEIGHT/10], HEIGHT//100)
-        else:
-            pygame.draw.line(screen, color_gold,[11*WIDTH/16,7*HEIGHT/10], [15*WIDTH/16,7*HEIGHT/10], HEIGHT//100)
-
-        pygame.draw.line(screen, color_dark,[0,3*HEIGHT/4], [WIDTH,3*HEIGHT/4], HEIGHT//150)
+        pygame.draw.line(screen, color_dark,[0,3*HEIGHT/4], [WIDTH,3*HEIGHT/4], 8)
         pygame.draw.rect(screen,color_dark,button_1_loc)
         pygame.draw.rect(screen,color_dark,button_2_loc)
         pygame.draw.rect(screen,color_dark,button_3_loc)
@@ -349,12 +246,9 @@ def main(player1, player2):
 
 
         # if players 1 turn
-        if(PlayerOneTurn):
-            for i in range(len(button_fonts_m1)):
-                screen.blit(button_fonts_m1[i], text_locations[i])
-        else:
-            for i in range(len(button_fonts_m2)):
-                screen.blit(button_fonts_m2[i], text_locations[i])
+
+        for i in range(len(button_fonts_m1)):
+            screen.blit(button_fonts_m1[i], text_locations[i])
 
         my_group.draw(screen)
         pygame.display.update()
@@ -380,3 +274,148 @@ p2 = p.Player(2, my_naga, "Sotiris")
 
 
 main(p1,p2)
+
+
+# #def monster_turn(monster):
+#
+# Eagle_turn =True
+# Ent_turn = False
+#
+# while True:
+#   if Eagle_turn ==True:
+#     for ev in py.event.get():
+#
+#         if ev.type == py.QUIT:
+#             py.quit()
+#
+#         #checks if a mouse is clicked
+#         if ev.type == py.MOUSEBUTTONDOWN:
+#
+#             #if the mouse is clicked on the
+#             # button the game is terminated
+#             if button_1_loc[0] <= mouse[0] <= button_1_loc[0]+ button_1_loc[2] and button_1_loc[1] <= mouse[1] <= button_1_loc[1]+button_1_loc[3]:
+#                 monster1.quick_attack(monster2)
+#                 print(monster2.hp)
+#                 Ent_turn = True
+#                 Eagle_turn =False
+#
+#
+#
+#             if button_2_loc[0] <= mouse[0] <= button_2_loc[0]+ button_2_loc[2] and button_2_loc[1] <= mouse[1] <= button_2_loc[1]+button_2_loc[3]:
+#                 print(monster2.hp)
+#                 monster1.dive_attack(monster2)
+#                 print(monster2.hp)
+#                 Ent_turn = True
+#                 Eagle_turn =False
+#
+#
+#
+#             if button_3_loc[0] <= mouse[0] <= button_3_loc[0]+ button_3_loc[2] and button_3_loc[1] <= mouse[1] <= button_3_loc[1]+button_3_loc[3]:
+#                 print(monster2.hp)
+#                 monster1.wing_slash(monster2)
+#                 print(monster2.hp)
+#                 Ent_turn = True
+#                 Eagle_turn =False
+#
+#
+#     # fills the screen with a color
+#     screen.fill((60,25,60))
+#
+#     # stores the (x,y) coordinates into
+#     # the variable as a tuple
+#     mouse = py.mouse.get_pos()
+#
+#
+#     # if mouse is hovered on a button it
+#     # changes to lighter shade
+#     if button_1_loc[0] <= mouse[0] <= button_1_loc[0]+ button_1_loc[2] and button_1_loc[1] <= mouse[1] <= button_1_loc[1]+button_1_loc[3]:
+#         py.draw.rect(screen,color_light,button_1_loc)
+#
+#     elif button_2_loc[0] <= mouse[0] <= button_2_loc[0]+ button_2_loc[2] and button_2_loc[1] <= mouse[1] <= button_2_loc[1]+button_2_loc[3]:
+#         py.draw.rect(screen,color_light,button_2_loc)
+#
+#     elif button_3_loc[0] <= mouse[0] <= button_3_loc[0]+ button_3_loc[2] and button_3_loc[1] <= mouse[1] <= button_3_loc[1]+button_3_loc[3]:
+#         py.draw.rect(screen,color_light,button_3_loc)
+#
+#     else:
+#         py.draw.rect(screen,color_dark,button_1_loc )
+#         py.draw.rect(screen,color_dark,button_2_loc )
+#         py.draw.rect(screen,color_dark,button_3_loc )
+#
+#
+#     # superimposing the text onto our button
+#     screen.blit(attack_1_mon_1 ,(button_1_loc[0],button_1_loc[1]))
+#     screen.blit(attack_2_mon_1 ,(button_2_loc[0],button_2_loc[1]))
+#     screen.blit(attack_3_mon_1 ,(button_3_loc[0],button_3_loc[1]))
+#
+#
+#     # updates the frames of the game
+#     py.display.update()
+#
+#   elif Ent_turn  ==True:
+#     for ev in py.event.get():
+#
+#         if ev.type == py.QUIT:
+#             py.quit()
+#
+#         #checks if a mouse is clicked
+#         if ev.type == py.MOUSEBUTTONDOWN:
+#
+#             #if the mouse is clicked on the
+#             # button the game is terminated
+#             if button_1_loc[0] <= mouse[0] <= button_1_loc[0]+ button_1_loc[2] and button_1_loc[1] <= mouse[1] <= button_1_loc[1]+button_1_loc[3]:
+#                 monster2.stomp(monster1)
+#                 print(monster1.hp)
+#                 Ent_turn = False
+#                 Eagle_turn =True
+#
+#
+#
+#             if button_2_loc[0] <= mouse[0] <= button_2_loc[0]+ button_2_loc[2] and button_2_loc[1] <= mouse[1] <= button_2_loc[1]+button_2_loc[3]:
+#                 monster2.stomp(monster1)
+#                 print(monster1.hp)
+#                 Ent_turn = False
+#                 Eagle_turn =True
+#
+#
+#
+#             if button_3_loc[0] <= mouse[0] <= button_3_loc[0]+ button_3_loc[2] and button_3_loc[1] <= mouse[1] <= button_3_loc[1]+button_3_loc[3]:
+#                 monster2.vine_whip(monster1)
+#                 print(monster1.hp)
+#                 Ent_turn = False
+#                 Eagle_turn = True
+#
+#
+#     # fills the screen with a color
+#     screen.fill((60,25,60))
+#
+#     # stores the (x,y) coordinates into
+#     # the variable as a tuple
+#     mouse = py.mouse.get_pos()
+#
+#
+#     # if mouse is hovered on a button it
+#     # changes to lighter shade
+#     if button_1_loc[0] <= mouse[0] <= button_1_loc[0]+ button_1_loc[2] and button_1_loc[1] <= mouse[1] <= button_1_loc[1]+button_1_loc[3]:
+#         py.draw.rect(screen,color_light,button_1_loc)
+#
+#     elif button_2_loc[0] <= mouse[0] <= button_2_loc[0]+ button_2_loc[2] and button_2_loc[1] <= mouse[1] <= button_2_loc[1]+button_2_loc[3]:
+#         py.draw.rect(screen,color_light,button_2_loc)
+#
+#     elif button_3_loc[0] <= mouse[0] <= button_3_loc[0]+ button_3_loc[2] and button_3_loc[1] <= mouse[1] <= button_3_loc[1]+button_3_loc[3]:
+#         py.draw.rect(screen,color_light,button_3_loc)
+#
+#     else:
+#         py.draw.rect(screen,color_dark,button_1_loc )
+#         py.draw.rect(screen,color_dark,button_2_loc )
+#         py.draw.rect(screen,color_dark,button_3_loc )
+#
+#
+#     # superimposing the text onto our button
+#     screen.blit(attack_1_mon_2 ,(button_1_loc[0],button_1_loc[1]))
+#     screen.blit(attack_2_mon_2 ,(button_2_loc[0],button_2_loc[1]))
+#     screen.blit(attack_3_mon_2 ,(button_3_loc[0],button_3_loc[1]))
+#
+#
+#     # updates the frames of the game
+#     py.display.update()
