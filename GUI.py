@@ -78,10 +78,10 @@ class MySprite(pygame.sprite.Sprite):
                 self.images.append(pygame.image.load('pics/resizedDevilL1.png'))
                 self.images.append(pygame.image.load('pics/resizedDevilL2.png'))
                 self.images.append(pygame.image.load('pics/resizedDevilL3.png'))
-            elif(player.monster.name == "Ent"):
-                self.images.append(pygame.image.load('pics/resizedEntL1.png'))
-                self.images.append(pygame.image.load('pics/resizedEntL2.png'))
-                self.images.append(pygame.image.load('pics/resizedEntL3.png'))
+            elif(player.monster.name == "Treebeard"):
+                self.images.append(pygame.image.load('pics/resizedTreebeardL1.png'))
+                self.images.append(pygame.image.load('pics/resizedTreebeardL2.png'))
+                self.images.append(pygame.image.load('pics/resizedTreebeardL3.png'))
         else:
             #only two players, duh
             self.rect = positionR
@@ -99,10 +99,10 @@ class MySprite(pygame.sprite.Sprite):
                 self.images.append(pygame.image.load('pics/resizedDevilR1.png'))
                 self.images.append(pygame.image.load('pics/resizedDevilR2.png'))
                 self.images.append(pygame.image.load('pics/resizedDevilR3.png'))
-            elif(player.monster.name == "Ent"):
-                self.images.append(pygame.image.load('pics/resizedEntR1.png'))
-                self.images.append(pygame.image.load('pics/resizedEntR2.png'))
-                self.images.append(pygame.image.load('pics/resizedEntR3.png'))
+            elif(player.monster.name == "Treebeard"):
+                self.images.append(pygame.image.load('pics/resizedTreebeardR1.png'))
+                self.images.append(pygame.image.load('pics/resizedTreebeardR2.png'))
+                self.images.append(pygame.image.load('pics/resizedTreebeardR3.png'))
 
 
 
@@ -143,7 +143,7 @@ def resize_monsters():
     resize_image("DevilR3.png", int(WIDTH/6), int(HEIGHT/3))
 
 
-    #ENT
+    #EAGLE
     resize_image("EagleL1.png", int(WIDTH/6), int(HEIGHT/3))
     resize_image("EagleL2.png", int(WIDTH/6), int(HEIGHT/3))
     resize_image("EagleL3.png", int(WIDTH/6), int(HEIGHT/3))
@@ -153,14 +153,14 @@ def resize_monsters():
     resize_image("EagleR3.png", int(WIDTH/6), int(HEIGHT/3))
 
 
-    #EAGLE
-    resize_image("EntL1.png", int(WIDTH/6), int(HEIGHT/3))
-    resize_image("EntL2.png", int(WIDTH/6), int(HEIGHT/3))
-    resize_image("EntL3.png", int(WIDTH/6), int(HEIGHT/3))
+    #TREEBEARD
+    resize_image("TreebeardL1.png", int(WIDTH/6), int(HEIGHT/3))
+    resize_image("TreebeardL2.png", int(WIDTH/6), int(HEIGHT/3))
+    resize_image("TreebeardL3.png", int(WIDTH/6), int(HEIGHT/3))
 
-    resize_image("EntR1.png", int(WIDTH/6), int(HEIGHT/3))
-    resize_image("EntR2.png", int(WIDTH/6), int(HEIGHT/3))
-    resize_image("EntR3.png", int(WIDTH/6), int(HEIGHT/3))
+    resize_image("TreebeardR1.png", int(WIDTH/6), int(HEIGHT/3))
+    resize_image("TreebeardR2.png", int(WIDTH/6), int(HEIGHT/3))
+    resize_image("TreebeardR3.png", int(WIDTH/6), int(HEIGHT/3))
 
 def resize_image(name, desiredWidth, desiredHeigh):
     # source: https://gph.is/1cmXeXT
@@ -261,7 +261,7 @@ def main(player1, player2):
 
 my_eagle = m.Eagle()
 
-my_ent = m.Ent()
+my_treebeard = m.Treebeard()
 
 my_devil = m.Devil()
 
@@ -269,8 +269,8 @@ my_naga = m.Naga()
 
 
 
-p1 = p.Player(1, my_naga, "Patryk")
-p2 = p.Player(2, my_devil, "Sotiris")
+p1 = p.Player(1, my_devil, "Patryk")
+p2 = p.Player(2, my_treebeard, "Sotiris")
 
 
 main(p1,p2)
