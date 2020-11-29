@@ -114,15 +114,49 @@ class Ent(Monster):
         damage = baseDmg * self.crit_multiplier() * defender.armour_multiplier()
         defender.hp -= damage
 
-class devil(Monster):
+class Devil(Monster):
     def __init__(self):
         # name, dex, stren, hp, ac, luck, element
         super().__init__('Devil', 9, 5, 17, 4, 0.3, Element.FIRE)
+    
+    def hellflame(self, defender):
+        print(self.name, 'used hellflame')
+        baseDmg = self.strength * self.element_compare(defender) * 1.2
+        damage = baseDmg * self.crit_multiplier() * defender.armour_multiplier()
+        defender.hp -= damage
+    
+    def ash_cloud (self, defender):
+        print(self.name, 'used ash cloud')
+        baseDmg = self.strength * self.element_compare(defender) * 1.2
+        damage = baseDmg * self.crit_multiplier() * defender.armour_multiplier()
+        defender.hp -= damage
+
+class Naga(Monster):
+    def __init__(self):
+        # name, dex, stren, hp, ac, luck, element
+        super().__init__('Devil', 9, 5, 17, 4, 0.3, Element.WATER)
+    
+    def aqua_pulse(self, defender):
+        print(self.name, 'used aqua pulse')
+        baseDmg = self.strength * self.element_compare(defender) * 1.2
+        damage = baseDmg * self.crit_multiplier() * defender.armour_multiplier()
+        defender.hp -= damage
+    
+    def rainstorm (self, defender):
+        print(self.name, 'used rainstorm')
+        baseDmg = self.strength * self.element_compare(defender) * 1.2
+        damage = baseDmg * self.crit_multiplier() * defender.armour_multiplier()
+        defender.hp -= damage
 
 
 
 monster1 = Eagle()
 monster2 = Ent()
+monster3 = Devil()
+monster4 = Naga()
 
 move_list_eagle = ['Quick Attack', 'Dive Attack', 'Wing Slash']
 move_list_ent = ['Attack', 'Stomp', 'Vine Whip']
+move_list_eagle = ['Quick Attack', 'Dive Attack', 'Wing Slash']
+move_list_ent = ['Quick Attack', 'Stomp', 'Vine Whip']
+move_list_devil = ['Quick Attack', 'Hellflame', 'Ash Cloud']
