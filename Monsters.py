@@ -96,11 +96,11 @@ class Eagle(Monster):
         damage = baseDmg * self.crit_multiplier() * defender.armour_multiplier()
         defender.hp -= damage
 
-class Ent(Monster):
+class Treebeard(Monster):
 
     def __init__(self):
         # name, dex, stren, hp, ac, luck, element
-        super().__init__('Ent', 4, 7, 20, 10, 0.1, Element.EARTH)
+        super().__init__('Treebeard', 4, 7, 20, 10, 0.1, Element.EARTH)
         self.moves = ['Attack', 'Stomp', 'Vine Whip']
     def stomp(self, defender):
         print(self.name, 'used stomp')
@@ -147,16 +147,3 @@ class Naga(Monster):
         baseDmg = self.strength * self.element_compare(defender) * 1.2
         damage = baseDmg * self.crit_multiplier() * defender.armour_multiplier()
         defender.hp -= damage
-
-
-
-monster1 = Eagle()
-monster2 = Ent()
-monster3 = Devil()
-monster4 = Naga()
-
-move_list_eagle = ['Quick Attack', 'Dive Attack', 'Wing Slash']
-move_list_ent = ['Attack', 'Stomp', 'Vine Whip']
-move_list_eagle = ['Quick Attack', 'Dive Attack', 'Wing Slash']
-move_list_ent = ['Quick Attack', 'Stomp', 'Vine Whip']
-move_list_devil = ['Quick Attack', 'Hellflame', 'Ash Cloud']
