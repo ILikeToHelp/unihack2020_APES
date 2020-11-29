@@ -8,6 +8,7 @@ Created on Sat Nov 28 18:36:21 2020
 import pygame
 from PIL import Image
 import Monsters as m
+import Player as p
 
 SIZE = WIDTH, HEIGHT = 900, 600#the width and height of our screen
 BACKGROUND_PICTURE = pygame.image.load('pics/bg.png') #https://www.deviantart.com/drboxhead/art/Avatar-The-Last-Airbender-Wallpaper-750669085
@@ -15,35 +16,95 @@ BACKGROUND_PICTURE = pygame.transform.scale(BACKGROUND_PICTURE, SIZE)
 
 FPS = 6  #Frames per second
 
+# ImageR1 = 'pics/resizedEagleR1.png'
+# ImageR2 = 'pics/resizedEagleR2.png'
+# ImageR3 = 'pics/resizedEagleR3.png'
+
+# Define for now (httpswww.kindpng.comimgvhmmwJxR_eagle-sprite-sheet-png-transparent-png)
+
+
+
+
+# Define for now (https://broseoseike.wordpress.com/tag/sprite-sheet/#jp-carousel-(406)
+
+
+# TODO FIX THOSE SPRITES -> VERY BAD
+
+# ImageR1 = 'pics/resizedEntR1.png'
+# ImageR2 = 'pics/resizedEntR2.png'
+# ImageR3 = 'pics/resizedEntR3.png'
+
+
+
+# Define for now (https://www.coroflot.com/geekbrush/Wicked-Little-Devil)
+
+
+# ImageR1 = 'pics/resizedDevilR1.png'
+# ImageR2 = 'pics/resizedDevilR2.png'
+# ImageR3 = 'pics/resizedDevilR3.png'
+
+
+#Define for now (https://broseoseike.files.wordpress.com/2009/04/naga.png)
+
+# ImageR1 = 'pics/resizedNagaR1.png'
+# ImageR2 = 'pics/resizedNagaR2.png'
+# ImageR3 = 'pics/resizedNagaR3.png'
 
 
 class MySprite(pygame.sprite.Sprite):
-    def __init__(self, left):
+    def __init__(self, player):
         super(MySprite, self).__init__()
 
         self.images = []
         self.rect = None
 
-        self.imagesL = []
-        self.imagesL.append(pygame.image.load(ImageL1))
-        self.imagesL.append(pygame.image.load(ImageL2))
-        self.imagesL.append(pygame.image.load(ImageL3))
-
-        self.imagesR = []
-        self.imagesR.append(pygame.image.load(ImageR1))
-        self.imagesR.append(pygame.image.load(ImageR2))
-        self.imagesR.append(pygame.image.load(ImageR3))
-
-        if left is False:
-            self.images = self.imagesL
-            self.rect = positionL
-
-        else:
-            self.images = self.imagesR
-            self.rect = positionR
-
-
         self.index = 0
+
+
+        if(player.number == 1):
+            self.rect = positionL
+            # it's player one so on the left
+            if(player.monster.name == "Eagle"):
+                # it's an eagle, so load eagle left images
+                self.images.append(pygame.image.load('pics/resizedEagleL1.png'))
+                self.images.append(pygame.image.load('pics/resizedEagleL2.png'))
+                self.images.append(pygame.image.load('pics/resizedEagleL3.png'))
+            elif(player.monster.name == "Naga"):
+                # it's an eagle, so load eagle left images
+                self.images.append(pygame.image.load('pics/resizedNagaL1.png'))
+                self.images.append(pygame.image.load('pics/resizedNagaL2.png'))
+                self.images.append(pygame.image.load('pics/resizedNagaL3.png'))
+            elif(player.monster.name == "Devil"):
+                self.images.append(pygame.image.load('pics/resizedDevilL1.png'))
+                self.images.append(pygame.image.load('pics/resizedDevilL2.png'))
+                self.images.append(pygame.image.load('pics/resizedDevilL3.png'))
+            elif(player.monster.name == "Ent"):
+                self.images.append(pygame.image.load('pics/resizedEntL1.png'))
+                self.images.append(pygame.image.load('pics/resizedEntL2.png'))
+                self.images.append(pygame.image.load('pics/resizedEntL3.png'))
+        else:
+            #only two players, duh
+            self.rect = positionR
+            if(player.monster.name == "Eagle"):
+                # it's an eagle, so load eagle left images
+                self.images.append(pygame.image.load('pics/resizedEagleR1.png'))
+                self.images.append(pygame.image.load('pics/resizedEagleR2.png'))
+                self.images.append(pygame.image.load('pics/resizedEagleR3.png'))
+            elif(player.monster.name == "Naga"):
+                # it's an eagle, so load eagle left images
+                self.images.append(pygame.image.load('pics/resizedNagaR1.png'))
+                self.images.append(pygame.image.load('pics/resizedNagaR2.png'))
+                self.images.append(pygame.image.load('pics/resizedNagaR3.png'))
+            elif(player.monster.name == "Devil"):
+                self.images.append(pygame.image.load('pics/resizedDevilR1.png'))
+                self.images.append(pygame.image.load('pics/resizedDevilR2.png'))
+                self.images.append(pygame.image.load('pics/resizedDevilR3.png'))
+            elif(player.monster.name == "Ent"):
+                self.images.append(pygame.image.load('pics/resizedEntR1.png'))
+                self.images.append(pygame.image.load('pics/resizedEntR2.png'))
+                self.images.append(pygame.image.load('pics/resizedEntR3.png'))
+
+
 
     def update(self):
         self.index += 1
@@ -55,52 +116,7 @@ class MySprite(pygame.sprite.Sprite):
 
 
 
-# Define for now (httpswww.kindpng.comimgvhmmwJxR_eagle-sprite-sheet-png-transparent-png)
 
-ImageL1 = 'pics/resizedEagleL1.png'
-ImageL2 = 'pics/resizedEagleL2.png'
-ImageL3 = 'pics/resizedEagleL3.png'
-
-# ImageR1 = 'pics/resizedEagleR1.png'
-# ImageR2 = 'pics/resizedEagleR2.png'
-# ImageR3 = 'pics/resizedEagleR3.png'
-
-
-
-# Define for now (https://broseoseike.wordpress.com/tag/sprite-sheet/#jp-carousel-(406)
-
-
-# TODO FIX THOSE SPRITES -> VERY BAD
-# ImageL1 = 'pics/resizedEntL1.png'
-# ImageL2 = 'pics/resizedEntL2.png'
-# ImageL3 = 'pics/resizedEntL3.png'
-#
-# ImageR1 = 'pics/resizedEntR1.png'
-# ImageR2 = 'pics/resizedEntR2.png'
-# ImageR3 = 'pics/resizedEntR3.png'
-
-
-
-# Define for now (https://www.coroflot.com/geekbrush/Wicked-Little-Devil)
-
-# ImageL1 = 'pics/resizedDevilL1.png'
-# ImageL2 = 'pics/resizedDevilL2.png'
-# ImageL3 = 'pics/resizedDevilL3.png'
-
-ImageR1 = 'pics/resizedDevilR1.png'
-ImageR2 = 'pics/resizedDevilR2.png'
-ImageR3 = 'pics/resizedDevilR3.png'
-
-
-#Define for now (https://broseoseike.files.wordpress.com/2009/04/naga.png)
-
-# ImageL1 = 'pics/resizedNagaL1.png'
-# ImageL2 = 'pics/resizedNagaL2.png'
-# ImageL3 = 'pics/resizedNagaL3.png'
-# #
-# ImageR1 = 'pics/resizedNagaR1.png'
-# ImageR2 = 'pics/resizedNagaR2.png'
-# ImageR3 = 'pics/resizedNagaR3.png'
 
 
 
@@ -167,7 +183,7 @@ resize_monsters()
 
 
 
-def main(monster1, monster2):
+def main(player1, player2):
     pygame.init()
     screen = pygame.display.set_mode(SIZE)
 
@@ -183,19 +199,19 @@ def main(monster1, monster2):
     smallfont = pygame.font.SysFont('Corbel',35)
 
     button_fonts_m1 = []
-    for i in monster1.moves:
+    for i in player1.monster.moves:
         button_fonts_m1.append(smallfont.render(i , True , color))
     button_fonts_m1.append(smallfont.render("Surrender" , True , color))
 
 
     button_fonts_m2 = []
-    for j in monster2.moves:
+    for j in player2.monster.moves:
         button_fonts_m2.append(smallfont.render(j , True , color))
     button_fonts_m2.append(smallfont.render("Surrender" , True , color))
 
 
-    my_sprite_looking_right = MySprite(False)
-    my_sprite_looking_left = MySprite(True)
+    my_sprite_looking_right = MySprite(player1)
+    my_sprite_looking_left = MySprite(player2)
     my_group = pygame.sprite.Group(my_sprite_looking_right, my_sprite_looking_left)
     clock = pygame.time.Clock()
 
@@ -206,7 +222,9 @@ def main(monster1, monster2):
                 quit()
 
         my_group.update()
+
         screen.blit(BACKGROUND_PICTURE, [0,0])
+
         button_1_loc = [WIDTH/7,4*HEIGHT/5,WIDTH/4,HEIGHT/18]
         button_2_loc = [WIDTH/7,7*HEIGHT/8,WIDTH/4,HEIGHT/18]
         button_3_loc = [WIDTH/7 + 3*WIDTH/7,4*HEIGHT/5,WIDTH/4,HEIGHT/18]
@@ -238,34 +256,26 @@ def main(monster1, monster2):
 
 
 
+
+
+
 my_eagle = m.Eagle()
+
 my_ent = m.Ent()
+
 my_devil = m.Devil()
+
 my_naga = m.Naga()
 
-main(my_eagle,my_eagle)
 
 
-#
-# # stores the width of the
-# # screen into a variable
-# width = screen.get_width()
-#
-# # stores the height of the
-# # screen into a variable
-# height = screen.get_height()
-#
-# # defining a font
-#
-# # rendering a text written in
-# # this font
+p1 = p.Player(1, my_naga, "Patryk")
+p2 = p.Player(2, my_devil, "Sotiris")
 
-#
-#
-#
 
-#
-#
+main(p1,p2)
+
+
 # #def monster_turn(monster):
 #
 # Eagle_turn =True

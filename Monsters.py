@@ -134,7 +134,7 @@ class Devil(Monster):
 class Naga(Monster):
     def __init__(self):
         # name, dex, stren, hp, ac, luck, element
-        super().__init__('Devil', 9, 5, 17, 4, 0.3, Element.WATER)
+        super().__init__('Naga', 9, 5, 17, 4, 0.3, Element.WATER)
         self.moves = ['Quick Attack', 'Aqua Pulse', 'Rainstorm']
     def aqua_pulse(self, defender):
         print(self.name, 'used aqua pulse')
