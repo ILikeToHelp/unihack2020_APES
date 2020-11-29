@@ -147,16 +147,3 @@ class Naga(Monster):
         baseDmg = self.strength * self.element_compare(defender) * 1.2
         damage = baseDmg * self.crit_multiplier() * defender.armour_multiplier()
         defender.hp -= damage
-
-
-
-monster1 = Eagle()
-monster2 = Treebeard()
-monster3 = Devil()
-monster4 = Naga()
-
-move_list_eagle = ['Quick Attack', 'Dive Attack', 'Wing Slash']
-move_list_treebeard = ['Attack', 'Stomp', 'Vine Whip']
-move_list_eagle = ['Quick Attack', 'Dive Attack', 'Wing Slash']
-move_list_treebeard = ['Quick Attack', 'Stomp', 'Vine Whip']
-move_list_devil = ['Quick Attack', 'Hellflame', 'Ash Cloud']
