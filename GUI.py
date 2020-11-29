@@ -182,15 +182,23 @@ positionR = pygame.Rect(WIDTH-2*WIDTH/7, HEIGHT/3, 150, 198)
 resize_monsters()
 
 
-def playerOneFlees():
-    print("PLAYER ONE IS A PUSSSY-A CAT I MEAN> SMALL CAT")
+def player1Lost():
+    print("PLAYER ONE LOST")
+
+def player2Lost():
+    print("PLAYER TWO LOST")
     sys.exit()
 
+def playerOneFlees():
+    print("PLAYER ONE HAS FLED")
+
 def playerTwoFlees():
-    print("PLAYER TWO IS A PUSSSY-A CAT I MEAN> SMALL CAT")
+    print("PLAYER TWO HAS FLED")
     sys.exit()
 
 def main(player1, player2):
+
+    hp_bar_len = 3*WIDTH/8 - WIDTH/8
 
     PlayerOneTurn = True
 
@@ -248,69 +256,82 @@ def main(player1, player2):
                         # if it's players one turn, print the values
                         print("Monsters " + player2.monster.name + " old hp was: " + str(player2.monster.hp))
                         # and call the corresponding functions
-                        player1.monster.quick_attack(player2.monster)
+                        if(player1.monster.quick_attack(player2.monster)):
+                            player2Lost()
                         print("Monsters " + player2.monster.name + " new hp is: " + str(player2.monster.hp))
                         PlayerOneTurn = False
                     else:
                         #reverse is true
                         print("Monsters " + player1.monster.name + " old hp was: " + str(player1.monster.hp))
-                        player2.monster.quick_attack(player1.monster)
+                        if(player2.monster.quick_attack(player1.monster)):
+                            player1Lost()
                         print("Monsters " + player1.monster.name + " new hp is: " + str(player1.monster.hp))
                         PlayerOneTurn = True
                 if button_2_loc[0] <= mouse[0] <= button_2_loc[0]+ button_2_loc[2] and button_2_loc[1] <= mouse[1] <= button_2_loc[1]+button_2_loc[3]:
                     pygame.draw.rect(screen,color_light,button_2_loc)
                     if(PlayerOneTurn):
+                        p2_lost = False
                         # if it's players one turn, print the values
                         print("Monsters " + player2.monster.name + " old hp was: " + str(player2.monster.hp))
                         if(player1.monster.name == "Naga"):
-                            player1.monster.aqua_pulse(player2.monster)
+                            p2_lost = player1.monster.aqua_pulse(player2.monster)
                         elif(player1.monster.name == "Treebeard"):
-                            player1.monster.stomp(player2.monster)
+                            p2_lost = player1.monster.stomp(player2.monster)
                         elif(player1.monster.name == "Eagle"):
-                            player1.monster.dive_attack(player2.monster)
+                            p2_lost = player1.monster.dive_attack(player2.monster)
                         elif(player1.monster.name == "Devil"):
-                            player1.monster.hellflame(player2.monster)
+                            p2_lost = player1.monster.hellflame(player2.monster)
+                        if(p2_lost):
+                            player2Lost()
+
                         print("Monsters " + player2.monster.name + " new hp is: " + str(player2.monster.hp))
                         PlayerOneTurn = False
                     else:
-                        # if it's players one turn, print the values
+                        p1_lost = False
                         print("Monsters " + player1.monster.name + " old hp was: " + str(player1.monster.hp))
                         if(player2.monster.name == "Naga"):
-                            player2.monster.aqua_pulse(player1.monster)
+                            p1_lost=player2.monster.aqua_pulse(player1.monster)
                         elif(player2.monster.name == "Treebeard"):
-                            player2.monster.stomp(player1.monster)
+                            p1_lost=player2.monster.stomp(player1.monster)
                         elif(player2.monster.name == "Eagle"):
-                            player2.monster.dive_attack(player1.monster)
+                            p1_lost=player2.monster.dive_attack(player1.monster)
                         elif(player2.monster.name == "Devil"):
-                            player2.monster.hellflame(player1.monster)
+                            p1_lost=player2.monster.hellflame(player1.monster)
+                        if(p1_lost):
+                            player1Lost()
                         print("Monsters " + player1.monster.name + " new hp is: " + str(player1.monster.hp))
                         PlayerOneTurn = True
                 if button_3_loc[0] <= mouse[0] <= button_3_loc[0]+ button_3_loc[2] and button_3_loc[1] <= mouse[1] <= button_3_loc[1]+button_3_loc[3]:
                     pygame.draw.rect(screen,color_light,button_3_loc)
                     if(PlayerOneTurn):
+                        p2_lost = False
                         # if it's players one turn, print the values
                         print("Monsters " + player2.monster.name + " old hp was: " + str(player2.monster.hp))
                         if(player1.monster.name == "Naga"):
-                            player1.monster.rainstorm(player2.monster)
+                            p2_lost=player1.monster.rainstorm(player2.monster)
                         elif(player1.monster.name == "Treebeard"):
-                            player1.monster.vine_whip(player2.monster)
+                            p2_lost=player1.monster.vine_whip(player2.monster)
                         elif(player1.monster.name == "Eagle"):
-                            player1.monster.wing_slash(player2.monster)
+                            p2_lost=player1.monster.wing_slash(player2.monster)
                         elif(player1.monster.name == "Devil"):
-                            player1.monster.ash_cloud(player2.monster)
+                            p2_lost=player1.monster.ash_cloud(player2.monster)
+                        if(p2_lost):
+                            player2Lost()
                         print("Monsters " + player2.monster.name + " new hp is: " + str(player2.monster.hp))
                         PlayerOneTurn = False
                     else:
-                        # if it's players one turn, print the values
+                        p1_lost = False
                         print("Monsters " + player1.monster.name + " old hp was: " + str(player1.monster.hp))
                         if(player2.monster.name == "Naga"):
-                            player2.monster.rainstorm(player1.monster)
+                            p1_lost = player2.monster.rainstorm(player1.monster)
                         elif(player2.monster.name == "Treebeard"):
-                            player2.monster.vine_whip(player1.monster)
+                            p1_lost = player2.monster.vine_whip(player1.monster)
                         elif(player2.monster.name == "Eagle"):
-                            player2.monster.wing_slash(player1.monster)
+                            p1_lost = player2.monster.wing_slash(player1.monster)
                         elif(player2.monster.name == "Devil"):
-                            player2.monster.ash_cloud(player1.monster)
+                            p1_lost = player2.monster.ash_cloud(player1.monster)
+                        if(p1_lost):
+                            player1Lost()
                         print("Monsters " + player1.monster.name + " new hp is: " + str(player1.monster.hp))
                         PlayerOneTurn = True
                 if button_4_loc[0] <= mouse[0] <= button_4_loc[0]+ button_4_loc[2] and button_4_loc[1] <= mouse[1] <= button_4_loc[1]+button_4_loc[3]:
@@ -335,6 +356,17 @@ def main(player1, player2):
         else:
             pygame.draw.line(screen, color_gold,[11*WIDTH/16,7*HEIGHT/10], [15*WIDTH/16,7*HEIGHT/10], HEIGHT//100)
 
+        color_pink = (255, 62, 150, 255)
+        color_dark_red = (139, 0, 0, 255)
+
+
+
+        # HP BARS
+        pygame.draw.line(screen, color_dark_red,[WIDTH/8,3*HEIGHT/10], [WIDTH/8+hp_bar_len*player1.monster.hp_procentage(),3*HEIGHT/10], HEIGHT//50)
+        pygame.draw.line(screen, color_dark_red,[5*WIDTH/8,3*HEIGHT/10], [5*WIDTH/8+hp_bar_len*player2.monster.hp_procentage(),3*HEIGHT/10], HEIGHT//50)
+
+
+        # MENU
         pygame.draw.line(screen, color_dark,[0,3*HEIGHT/4], [WIDTH,3*HEIGHT/4], HEIGHT//150)
         pygame.draw.rect(screen,color_dark,button_1_loc)
         pygame.draw.rect(screen,color_dark,button_2_loc)

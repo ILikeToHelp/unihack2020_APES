@@ -19,6 +19,7 @@ class Monster():
         self.dexterity = dex
         self.strength = stren
         self.hp = hp
+        self.max_hp = hp
         self.armour = ac
         self.luck = luck
         self.element = element
@@ -31,6 +32,10 @@ class Monster():
             return 2
         else:
             return 1
+
+    def hp_procentage(self):
+        return self.hp / self.max_hp
+        
     def dodge(defender):
         dodgeChance = np.random.rand()
         if dodgeChance < (defender.dexterity) * 0.05:
